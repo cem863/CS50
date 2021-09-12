@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Friend Info
+{% endblock %}
+
+{% block main %}
+ <!--  Style below taken from bootstrap https://getbootstrap.com/docs/4.0/components/list-group/ -->
+ <!-- On this page, the user will see some information about their friends -->
+<div class="row">
+  <div class="col-4">
+    <div class="list-group" id="list-tab" role="tablist">
+      <a class="list-group-item list-group-item-action active" id="list-name-list" data-toggle="list" href="#list-name" role="tab" aria-controls="name">Name</a>
+      <a class="list-group-item list-group-item-action" id="list-email-list" data-toggle="list" href="#list-email" role="tab" aria-controls="email">Email</a>
+      <a class="list-group-item list-group-item-action" id="list-food-list" data-toggle="list" href="#list-food" role="tab" aria-controls="food">Some news on what they love</a>
+      <a class="list-group-item list-group-item-action" id="list-meet-list" data-toggle="list" href="#list-meet" role="tab" aria-controls="meet">Where did you first meet?</a>
+      <a class="list-group-item list-group-item-action" id="list-type-list" data-toggle="list" href="#list-type" role="tab" aria-controls="type">Nature of Relationship</a>
+      <a class="list-group-item list-group-item-action" id="list-priority-list" data-toggle="list" href="#list-priority" role="tab" aria-controls="priority">What priority should your relationship have?</a>
+    </div>
+  </div>
+  <div class="col-8">
+    <div class="tab-content" id="nav-tabContent">
+    {% for info in friendinfo %}
+      <div class="tab-pane fade show active" id="list-name" role="tabpanel" aria-labelledby="list-name-list">{{ info.friend_name }}</div>
+      <div class="tab-pane fade" id="list-email" role="tabpanel" aria-labelledby="list-email-list">{{ info.friend_email }}</div>
+      <div class="tab-pane fade" id="list-food" role="tabpanel" aria-labelledby="list-food-list"><iframe src="https://www.bing.com/news/search?q={{ info.friend_food }}" width="853" height="480" frameborder="0" ></iframe></div>
+      <div class="tab-pane fade" id="list-meet" role="tabpanel" aria-labelledby="list-meet-list">{{ info.friend_where }}</div>
+      <div class="tab-pane fade" id="list-type" role="tabpanel" aria-labelledby="list-type-list">{{ info.friend_type }}</div>
+      <div class="tab-pane fade" id="list-priority" role="tabpanel" aria-labelledby="list-priority-list">{{ info.priority }}</div>
+     {% endfor %}
+    </div>
+  </div>
+</div>
+
+ <!-- I add a button so that the user can decide whether to reach out to their friend with a set email or not. The hidden friend_id element helps me pass this information. -->
+{% for info in friendinfo %}
+<form action="/eachfriendinfo" method="POST">
+    <!-- I will  create an element containing the friend id and hide it. The user, however, could see this in "inspect". But I do not intend friend id's to be private, as they are just a number -->
+    <input hidden autocomplete="off" autofocus class="form-control" name="friend_id" value = "{{ info.friend_id }}" type="text">
+    <input class="btn btn-primary" type="submit" name="reachout_button" value="Reach Out by Automatic Email">
+</form>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+
+        <div class = "title">
+            <h1 id = "myname"> This is your network. </h1>
+            <!-- I create a line below the heading of the website to make it look nicer -->
+            <hr class = "line" id ="refline">
+
+                    <!-- I create three clickable circles. These take the user to other pages. -->
+                    <a href = "/">
+                        <div class="circle" >
+                            My Friends
+                        </div>
+                    </a>
+
+                    <a href = "/toreachoutto">
+                        <div class="circle">
+                            Reach out now!
+                        </div>
+                    </a>
+
+                    <a href = "/buy">
+                        <div class="circle">
+                            Add a friend
+                        </div>
+                    </a>
+        </div>
+
+{% endblock %}

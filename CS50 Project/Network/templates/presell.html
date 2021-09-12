@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+    
+<form action="/sell" method="post">
+    <!-- Friend Types can be selected here -->
+    <!-- onchange learnt from https://www.w3schools.com/jsref/event_onchange.asp -->
+    <select class="custom-select" id="type" name="type" onchange = "submit()">
+        <option disabled selected>What is the nature of your relationship with this person?</option>
+        {% for type in types %}
+            <option value="{{ type }}">{{ type }}</option>
+        {% endfor %}
+    </select>
+</form>
+
+<!-- Style taken from Bootstrap https://getbootstrap.com/docs/4.0/components/list-group/ -->
+<ul class="list-group list-group-flush">
+    {% for info in friendinfo %}
+          <li class="list-group-item">{{ info.friend_name }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

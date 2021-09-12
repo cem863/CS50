@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+
+<!-- The page containing the list of friends that the user has to reach out to refreshes every 30 seconds --> 
+<meta http-equiv="refresh" content="30">   
+
+<h1> You forgot to reach out to these friends! </h1>
+ 
+ 
+ <!-- Style taken from Bootstrap https://getbootstrap.com/docs/4.0/components/list-group/ -->
+<ul class="list-group list-group-flush">
+    {% for name in names %}
+        {% if name.priority == 'High' %}
+             <li class="list-group-item"><a class="high_priority" href="{{ url_for('eachfriendinfo', friend_id = name['friend_id']) }}">{{ name.friend_name }}</a></li>
+        {% else %}
+             <li class="list-group-item"><a class="low_priority" href="{{ url_for('eachfriendinfo', friend_id = name['friend_id']) }}">{{ name.friend_name }}</a></li>
+        {% endif %}
+    {% endfor %}
+          
+</ul>
+
+
+{% endblock %}

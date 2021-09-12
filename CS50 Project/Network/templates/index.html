@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+
+<!-- This refreshes every 30 seconds. This allows popup notifications to appear more fluidly --> 
+<meta http-equiv="refresh" content="30">  
+
+<h1> Here you'll see all your friends!</h1>
+
+     {% for popup_name in popup_names %}               
+    <!-- Code below adapted from bootstrap -->           
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong>You forgot to reach out to {{ popup_name.friend_name }}! </strong> Click <a href="{{ url_for('eachfriendinfo', friend_id = popup_name['friend_id']) }}"> here </a> to check out their profile!
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+    
+<!-- Style taken from Bootstrap https://getbootstrap.com/docs/4.0/components/list-group/ -->
+<ul class="list-group list-group-flush">
+    {% for name in names %}
+          <li class="list-group-item">{{ name.friend_name }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

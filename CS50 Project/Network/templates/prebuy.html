@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+    <!--  In login.html is, essentially, just an HTML form, stylized with Bootstrap -->
+    <form action="/buy" method="post">
+        <!-- Friend Name -->
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="friend_name" placeholder="Friend Name" type="text">
+        </div>
+        
+        <!-- Friend Email -->
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="friend_email" placeholder="Friend's Email" type="text">
+        </div>
+        
+        
+        <!-- Friend Likes -->
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="friend_food" placeholder="What do they LOVE?" type="text">
+        </div>
+        
+        <!-- Where did you meet? -->
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="friend_where" placeholder="Where did you meet?" type="text">
+        </div>
+        
+        <!-- Friend Priority -->
+        <select class="custom-select" id="priority" name="priority">
+            <option disabled selected>What priority level do you want to set to this relationship?</option>
+            {% for priority in priorities %}
+                <option value="{{ priority }}">{{ priority }}</option>
+            {% endfor %}
+        </select>
+        
+        <!-- Friend Type -->
+        <select class="custom-select" id="type" name="type">
+            <option disabled selected>What is the nature of your relationship with this person?</option>
+            {% for type in types %}
+                <option value="{{ type }}">{{ type }}</option>
+            {% endfor %}
+        </select>
+        
+        <!-- Friend Frequency -->
+        <select class="custom-select" id="frequency" name="frequency">
+            <option disabled selected>How often do you need to reach out to them?</option>
+             {% for frequency in frequencies %}
+                <option value="{{ frequency }}">Every {{ frequency }}</option>
+            {% endfor %}
+        </select>
+        <button class="btn btn-primary" type="submit">Add</button>
+    </form>
+{% endblock %}
